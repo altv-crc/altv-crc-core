@@ -7,7 +7,7 @@
 	<sup>Spend more time coding, and less time restarting</sup>
 </p>
 <p align="center">
-	<img src="https://i.imgur.com/QdU5BnP.png" width="350" title="hover text">
+	<img src="https://i.imgur.com/QdU5BnP.png" width="600" title="hover text">
 </p>
 
 # Features
