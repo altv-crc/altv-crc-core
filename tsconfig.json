@@ -16,7 +16,8 @@
         "outDir": "./resources",
         "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
-        "declaration": false
+        "declaration": false,
+        "strict": false
     },
     "include": ["./src/**/*.ts"],
     "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"]
