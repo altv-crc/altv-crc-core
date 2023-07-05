@@ -15,12 +15,28 @@ let fileDebounce = {};
 /** @type {{ [filePath: string]: string }} */
 let fileContents = {};
 
+const supportedFileExtensions = ['.ts', '.js', '.vue', '.tsx', '.jsx', '.html', '.rml']
+
 fs.watch('src', { recursive: true }, async (eventType, fileName) => {
     if (eventType !== 'change' && eventType !== 'rename') {
         return;
     }
 
     if (!fileName) {
+        return;
+    }
+
+    let foundExtension = false;
+    for (let extension of supportedFileExtensions) {
+        if (!fileName.includes(extension)) {
+            continue;
+        }
+
+        foundExtension = true;
+        break;
+    }
+
+    if (!foundExtension) {
         return;
     }
 
@@ -31,6 +47,11 @@ fs.watch('src', { recursive: true }, async (eventType, fileName) => {
     }
 
     fileDebounce[fileName] = Date.now() + DEBOUNCE_TIME;
+
+    const stat = fs.statSync(`src/${fileName}`);
+    if (stat.isDirectory()) {
+        return;
+    }
 
     const content = fs.readFileSync(`src/${fileName}`, { encoding: 'utf8' });
     const newHash = createHash('sha256').update(content).digest('hex');
