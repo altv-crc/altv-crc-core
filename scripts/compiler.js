@@ -26,10 +26,14 @@ async function buildTargetResource(name) {
         fs.rmSync(`resources/${name}`, { force: true, recursive: true });
     }
 
-    const filesToCompile = glob.sync(`./src/${name}/**/*.ts`);
+    const filesToCompile = glob.sync(`./src/${name}/**/*.ts`, { platform: 'linux' });
     let compileCount = 0;
     for (let i = 0; i < filesToCompile.length; i++) {
-        const filePath = normalizeFilePath(filesToCompile[i]);
+        const filePath = filesToCompile[i]
+        if (filePath.includes(`src/${name}/types`)) {
+            continue;
+        }
+
         const finalPath = filePath.replace('src/', 'resources/').replace('.ts', '.js');
         const compiled = swc.transformFileSync(filePath, SWC_CONFIG);
 

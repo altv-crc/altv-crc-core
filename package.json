@@ -24,8 +24,8 @@
         "altv-pkg": "^2.2.1",
         "fkill": "^8.1.0",
         "glob": "^10.3.1",
-        "typescript": "latest",
-        "toml": "^3.0.0"
+        "toml": "^3.0.0",
+        "typescript": "latest"
     },
     "prettier": {
         "tabWidth": 4,
@@ -33,5 +33,8 @@
         "printWidth": 120,
         "arrowParens": "always",
         "singleQuote": true
+    },
+    "dependencies": {
+        "@stuyk/cross-resource-cache": "^1.0.4"
     }
 }

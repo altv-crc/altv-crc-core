@@ -4,11 +4,14 @@ import { getResources, normalizeFilePath, getTimeStamp } from './shared.js';
 
 async function copyResourceAssets(name) {
     const startTime = Date.now();
-    const files = glob.sync(`./src/${name}/**/*.!(ts)`);
+    const files = glob.sync(`./src/${name}/**/*.!(ts)`, { platform: 'linux' });
 
     let filesCopied = 0;
-    for (let file of files) {
-        const filePath = normalizeFilePath(file);
+    for (let filePath of files) {
+        if (filePath.includes(`src/${name}/types`)) {
+            continue;
+        }
+
         const finalPath = filePath.replace('src/', 'resources/');
 
         const splitFinalPath = finalPath.split('/');

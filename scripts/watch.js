@@ -36,6 +36,10 @@ fs.watch('src', { recursive: true }, async (eventType, fileName) => {
         break;
     }
 
+    if (fileName.includes('d.ts')) {
+        return;
+    }
+
     if (!foundExtension) {
         return;
     }
