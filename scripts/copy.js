@@ -10,6 +10,12 @@ async function copyResourceAssets(name) {
     for (let file of files) {
         const filePath = normalizeFilePath(file);
         const finalPath = filePath.replace('src/', 'resources/');
+
+        const splitFinalPath = finalPath.split('/');
+        splitFinalPath.pop();
+        const directoryToMake = splitFinalPath.join('/');
+        fs.mkdirSync(directoryToMake, { recursive: true });
+
         fs.copyFileSync(filePath, finalPath);
         filesCopied += 1;
     }
