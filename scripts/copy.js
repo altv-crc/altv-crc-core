@@ -1,12 +1,13 @@
 import * as fs from 'node:fs';
 import * as glob from 'glob';
-import { getResources, normalizeFilePath, getTimeStamp } from './shared.js';
+import { getResources, getTimeStamp } from './shared.js';
+
+const startTime = Date.now();
+let filesCopied = 0;
 
 async function copyResourceAssets(name) {
-    const startTime = Date.now();
     const files = glob.sync(`./src/${name}/**/*.!(ts)`, { platform: 'linux' });
 
-    let filesCopied = 0;
     for (let filePath of files) {
         if (filePath.includes(`src/${name}/types`)) {
             continue;
@@ -22,10 +23,10 @@ async function copyResourceAssets(name) {
         fs.copyFileSync(filePath, finalPath);
         filesCopied += 1;
     }
-
-    console.log(`[${getTimeStamp()}] [${name}] | ${filesCopied} Files Moved | ${Date.now() - startTime}ms`);
 }
 
 for (let resource of getResources()) {
     copyResourceAssets(resource);
 }
+
+console.log(`[${getTimeStamp()}] ${filesCopied} Files Copied | ${Date.now() - startTime}ms`);

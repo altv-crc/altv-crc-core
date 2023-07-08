@@ -3,12 +3,13 @@ import * as glob from 'glob';
 import swc from '@swc/core';
 import { getResources, getTimeStamp, normalizeFilePath } from './shared.js';
 
+/** @type {swc.Config} */
 const SWC_CONFIG = {
     jsc: {
         parser: {
             syntax: 'typescript',
             dynamicImport: true,
-            decorators: true,
+            decorators: true
         },
         transform: {
             legacyDecorator: true,
@@ -19,15 +20,15 @@ const SWC_CONFIG = {
     sourceMaps: false,
 };
 
-async function buildTargetResource(name) {
-    const startTime = Date.now();
+let compileCount = 0;
+const startTime = Date.now();
 
+async function buildTargetResource(name) {
     if (fs.existsSync(`resources/${name}`)) {
         fs.rmSync(`resources/${name}`, { force: true, recursive: true });
     }
 
     const filesToCompile = glob.sync(`./src/${name}/**/*.ts`, { platform: 'linux' });
-    let compileCount = 0;
     for (let i = 0; i < filesToCompile.length; i++) {
         const filePath = filesToCompile[i]
         if (filePath.includes(`src/${name}/types`)) {
@@ -46,9 +47,12 @@ async function buildTargetResource(name) {
         compileCount += 1;
     }
 
-    console.log(`[${getTimeStamp()}] [${name}] Built ${compileCount} files in ${Date.now() - startTime}ms`);
+
+
 }
 
 for (let resource of getResources()) {
     buildTargetResource(resource);
 }
+
+console.log(`[${getTimeStamp()}] Built ${compileCount} Files | ${Date.now() - startTime}ms`);
