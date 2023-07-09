@@ -31,7 +31,7 @@ A simple Typescript Boilerplate that builds incredibly fast using the [SWC Libra
 Use the command below in any terminal, command prompt, etc.
 
 ```sh
-git clone https://github.com/Stuyk/altv-typescript
+git clone https://github.com/Stuyk/altv-crc-core
 ```
 
 ## Install the Repository
@@ -39,7 +39,7 @@ git clone https://github.com/Stuyk/altv-typescript
 Use the command below in any terminal, command prompt, etc.
 
 ```sh
-cd altv-typescript
+cd altv-crc-core
 npm install
 ```
 
