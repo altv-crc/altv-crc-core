@@ -35,6 +35,6 @@
         "singleQuote": true
     },
     "dependencies": {
-        "@stuyk/cross-resource-cache": "^1.0.5"
+        "@stuyk/cross-resource-cache": "^1.0.7"
     }
 }
