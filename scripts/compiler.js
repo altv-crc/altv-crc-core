@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import * as glob from 'glob';
 import swc from '@swc/core';
-import { getResources, getTimeStamp, normalizeFilePath } from './shared.js';
+import { getResources, getTimeStamp } from './shared.js';
 
 /** @type {swc.Config} */
 const SWC_CONFIG = {
@@ -32,6 +32,10 @@ async function buildTargetResource(name) {
     for (let i = 0; i < filesToCompile.length; i++) {
         const filePath = filesToCompile[i]
         if (filePath.includes(`src/${name}/types`)) {
+            continue;
+        }
+
+        if (filePath.includes(`src/${name}/schemas`)) {
             continue;
         }
 

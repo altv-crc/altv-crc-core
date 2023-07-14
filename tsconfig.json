@@ -1,6 +1,12 @@
 {
     "compilerOptions": {
-        "typeRoots": ["./node_modules/@types", "./node_modules/@altv", "./src/**/types"],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/@altv",
+            "./src/**/types",
+            "./src/**/schemas",
+            "./schemas"
+        ],
         "removeComments": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
@@ -14,11 +20,10 @@
         "module": "esNext",
         "target": "esNext",
         "outDir": "./resources",
-        "rootDir": "./src",
         "allowSyntheticDefaultImports": true,
         "declaration": false,
         "strict": false
     },
-    "include": ["./src/**/*.ts"],
+    "include": ["./src/**/*.ts", "./schemas/**/*.ts"],
     "exclude": ["node_modules", "**/*.spec.ts", "resources", "**/*.json"]
 }
